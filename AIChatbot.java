@@ -3,11 +3,11 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AIChatbot {
-    // Knowledge base for rule-based matching
+   
     private static final Map<String, String> responses = new HashMap<>();
 
     static {
-        // Training the bot with FAQ data
+      
         responses.put("hello", "Hello! I am your AI assistant. How can I help you today?");
         responses.put("hi", "Hi there! What can I do for you?");
         responses.put("how are you", "I'm functioning at peak performance, thank you! How are you?");
@@ -31,7 +31,7 @@ public class AIChatbot {
             System.out.print("\nYou: ");
             String userInput = scanner.nextLine();
             
-            // Clean and process input (Basic NLP pipeline steps: Lowercasing & Punctuation removal)
+        
             String processedInput = preprocessInput(userInput);
 
             if (processedInput.equals("bye")) {
@@ -46,31 +46,26 @@ public class AIChatbot {
         scanner.close();
     }
 
-    /**
-     * Simple NLP Preprocessing technique
-     */
+
     private static String preprocessInput(String input) {
         if (input == null) return "";
-        // Convert to lowercase and remove common punctuation markers
+
         return input.toLowerCase()
                     .replaceAll("[?.!,:]", "")
                     .trim();
     }
 
-    /**
-     * Rule-based Machine Learning/Matching Intent Logic
-     */
     private static String getChatbotResponse(String input) {
         if (input.isEmpty()) {
             return "I didn't catch that. Could you say it again?";
         }
 
-        // Direct FAQ Match
+   
         if (responses.containsKey(input)) {
             return responses.get(input);
         }
 
-        // Tokenization/Keyword Matching Scan (Advanced fallback rule logic)
+
         String[] words = input.split("\\s+");
         for (String word : words) {
             if (responses.containsKey(word)) {
@@ -78,7 +73,7 @@ public class AIChatbot {
             }
         }
 
-        // Default response when NLP engine can't resolve intent
+
         return "I'm still learning! I don't quite understand that question yet. Could you rephrase it?";
     }
 }
